@@ -14,7 +14,7 @@ public class DBConnection {
     private String dbName = "testpersonne";
     private Connection connection;
 
-    public DBConnection() throws SQLException {
+    public DBConnection(){
     }
 
     public void setNomDB(String nomDB) throws SQLException {
@@ -22,7 +22,7 @@ public class DBConnection {
         connection = null;
     }
 
-    public static synchronized DBConnection getInstance() throws SQLException {
+    public static synchronized DBConnection getInstance(){
         if(instance==null){
             instance = new DBConnection();
         }
