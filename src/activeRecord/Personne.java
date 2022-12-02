@@ -33,37 +33,27 @@ public class Personne {
         return result;
     }
 
-    public ArrayList<String> findById(int idD) throws SQLException {
-        ArrayList<String> result = new ArrayList<>();
+    public static Personne findById(int idD) throws SQLException {
+        DBConnection connection = DBConnection.getInstance();
+        Connection connect = connection.getConnection();
         String SQLPrep = "SELECT * FROM Personne WHERE id=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.setInt(1, idD);
         prep1.execute();
         ResultSet rs = prep1.getResultSet();
-        // s'il y a un resultat
-        if (rs.next()) {
-            String nom = rs.getString("nom");
-            String prenom = rs.getString("prenom");
-            int id = rs.getInt("id");
-            result.add("  -> (" + id + ") " + nom + ", " + prenom);
-        }
+        Personne result = new Personne(rs.getString("nom"),rs.getString("prenom"));
         return result;
     }
 
-    public ArrayList<String> findByName(String nomD) throws SQLException {
-        ArrayList<String> result = new ArrayList<>();
+    public static Personne findByName(String nomD) throws SQLException {
+        DBConnection connection = DBConnection.getInstance();
+        Connection connect = connection.getConnection();
         String SQLPrep = "SELECT * FROM Personne WHERE nom=?;";
         PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
         prep1.setString(1, nomD);
         prep1.execute();
         ResultSet rs = prep1.getResultSet();
-        // s'il y a un resultat
-        if (rs.next()) {
-            String nom = rs.getString("nom");
-            String prenom = rs.getString("prenom");
-            int id = rs.getInt("id");
-            result.add("  -> (" + id + ") " + nom + ", " + prenom);
-        }
+        Personne result = new Personne(rs.getString("nom"),rs.getString("prenom"));
         return result;
     }
 
